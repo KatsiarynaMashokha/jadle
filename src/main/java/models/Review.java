@@ -78,18 +78,16 @@ public class Review {
         if (id != review.id) return false;
         if (restaurantId != review.restaurantId) return false;
         if (!writtenBy.equals(review.writtenBy)) return false;
-        if (createdAt != null ? !createdAt.equals(review.createdAt) : review.createdAt != null) return false;
-        return content != null ? content.equals(review.content) : review.content == null;
+        return content.equals(review.content);
     }
 
     @Override
     public int hashCode() {
         int result = writtenBy.hashCode();
         result = 31 * result + rating;
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + id;
         result = 31 * result + restaurantId;
-        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + content.hashCode();
         return result;
     }
 }
