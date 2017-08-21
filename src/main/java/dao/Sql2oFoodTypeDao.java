@@ -1,5 +1,5 @@
-package dao;
-
-public class Sql2oFoodTypeDao {
-
-}
+//package dao;
+//
+//public class Sql2oFoodTypeDao {
+//
+//}
