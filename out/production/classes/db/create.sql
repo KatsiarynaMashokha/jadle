@@ -16,10 +16,10 @@ CREATE TABLE IF NOT EXISTS restaurants (
 --    name VARCHAR
 --    );
 --
---CREATE TABLE IF NOT EXISTS reviews (
---    id int PRIMARY KEY auto_increment,
---    writtenBy VARCHAR,
---    rating int,
---    createdat TIMESTAMP,
---    restaurantid INTEGER
---    );
+CREATE TABLE IF NOT EXISTS reviews (
+    id int PRIMARY KEY auto_increment,
+    writtenBy VARCHAR,
+    rating int,
+    restaurantId INTEGER,
+    content VARCHAR
+    );
