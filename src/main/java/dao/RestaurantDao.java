@@ -11,15 +11,19 @@ public interface RestaurantDao {
         // void addRestaurantToFoodType(Restaurant restaurant, Foodtype foodtype) //D & E
 
         //read
-//        List<Restaurant> getAll(); //A
-//        // List<Foodtype> getAllFoodtypesForARestaurant(int restaurantId); //D & E
-//
-//        Restaurant findById(int id); //B & C
-//
-//        //update
-//        void update(int id, String name, String address, String zipcode, String phone, String website, String email, String image); //L
-//
-//        //delete
-//        void deleteById(int id); //K
+        List<Restaurant> getAll(); //A
+
+        // List<Foodtype> getAllFoodtypesForARestaurant(int restaurantId); //D & E
+
+        Restaurant findById(int id); //B & C
+
+        //update restaurant info
+        void update(int id, String name, String address, String zipcode, String phone, String website, String email, String image); //L
+
+        //delete individual restaurant
+        void deleteById(int id); //K
+
+        //delete all restaurants
+        void clearAllRestaurants();
     }
 
