@@ -1,32 +1,31 @@
-# _Online Hack-A-Thon Team Builder_
-####  _This team builder web page was written with the help of the IntelliJ and Java. Published on 08/18/2017._
-#### By _**Kimberly Lu**_
+# _Jadle_
+####  _This application finds restaurants by foodtype & reviews._
+#### By _**Kimberly Lu && Stephanie Mayer**_
 
 ## Description
-This team builder site allows user to add teams and members to each team.  It also allows the user to update or delete information about a team and/or member.
+Creates an API for different restaurants and foodtypes.
 
 ## Development Specifications
-| Behavior      | Example Input         | Example Output        |
-| ------------- | ------------- | ------------- |
-| Create a team | team  |     teams        |
-| add name of team  |      "red"  | "red"|
-| add description to team | "red", "we are number 1" | "red", "we are number 1"|  
-| add a team member to team| "red", "we are number 1", "Perry"| "red", "we are number 1", "Perry"|  
-| add more than one team member | "red", "we are number 1", "Perry", "Tim"| "red", "we are number 1", "Perry", "Tim" |
-| update team name | "yellow", "we are number 1", "Perry", "Tim"| "yellow", "we are number 1", "Perry", "Tim"|
-|delete an individual team |delete|" " |
-|delete all teams|delete|" "|
-|show the details of the team|"red", "we are number 1", "Perry", "Tim"|"red", "we are number 1", "Perry", "Tim"|
-|show details of the member|"red, Perry"|"red, Perry|
-update team member name|"Bob"|"Bob"|
-|delete team member|delete|" "|
-|delete all members|delete|" "|
+A. As a user, I want to see all Restaurants in a specific zip code
+B. As a user, I want to see one individual Restaurant
+C. As a user, I want to see a specific information such as the Restaurant's name, address, phone number, website, email, and image
+D. As a user, I want to see which kind of Foodtypes a single Restaurant is associated with
+E. As a user, I want to see all Restaurants of a specific Foodtype (say, Pho, or Brunch) so I can browse through them
+F. As a user, I want to be able to leave a Review of a Restaurant
+G. As a user, I want to see the average rating for a Restaurant
+H. As a user, I want to see all Reviews for a Restaurant
+I. As a user, I want to be able to see when a Review was added, so I can tell whether it is recent
+J. As an admin, I want to be able to add a Restaurant to the database
+K. As an admin, I want to delete Restaurants that close, or have department violations.
+L. As an admin, I want to edit Restaurants where details change
+M. As an admin, I want to delete Reviews that are from trolls and spammers
+N. As an admin, I want to add a Foodtype so a Restaurant can be associated with it
+
 
 ## Setup/Installation Requirements
 _Download the following project from the gitHub by tapping "Download" or using 'git clone' from the terminal_
 
-## Support and contact details
-_For any concerns or questions email to: klu@gmail.com_
+
 
 ### License
 MIT license & Copyright (c) 2017 **_Kimberly Lu_**
