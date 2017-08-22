@@ -1,6 +1,7 @@
 package dao;
 
 import models.Foodtype;
+import models.Restaurant;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,6 +65,32 @@ public class Sql2oFoodtypeDaoTest {
         assertEquals(0, foodtypeDao.getAll().size());
     }
 
+    @Test
+    public void addFoodTypeToRestaurantAddsTypeCorrectly() throws Exception {
+
+        Restaurant testRestaurant = setupNewRestaurant();
+        Restaurant altRestaurant = setupNewRestaurant2();
+
+        restaurantDao.add(testRestaurant);
+        restaurantDao.add(altRestaurant);
+
+        Foodtype testFoodtype = setupNewFoodtype();
+
+        foodtypeDao.add(testFoodtype);
+
+        foodtypeDao.addFoodtypeToRestaurant(testFoodtype, testRestaurant);
+        foodtypeDao.addFoodtypeToRestaurant(testFoodtype, altRestaurant);
+
+        assertEquals(2, foodtypeDao.getAllRestaurantsForAFoodtype(testFoodtype.getId()).size());
+    }
+
     public Foodtype setupNewFoodtype() { return new Foodtype("Chinese");}
     public Foodtype setupNewFoodtype2() { return new Foodtype("American");}
+
+    public Restaurant setupNewRestaurant(){
+        return new Restaurant("PhoVan", "1234 SE Division Street", "97206", "503-260-9999", "https://www.phovan.com", "pho@gmail.com", "soup.jpg" );
+    }
+    public Restaurant setupNewRestaurant2(){
+        return new Restaurant("Olive Garden", "415 SW 107th", "97005", "503-123-4567");
+    }
 }
