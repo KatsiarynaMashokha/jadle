@@ -104,7 +104,7 @@ public class Sql2oRestaurantDaoTest {
         restaurantDao.addRestaurantToFoodtype(testRestaurant,testFoodtype);
         restaurantDao.addRestaurantToFoodtype(testRestaurant,otherFoodtype);
 
-        Foodtype[] foodtypes = {testFoodtype, otherFoodtype}; //oh hi what is this?
+        Foodtype[] foodtypes = {testFoodtype, otherFoodtype}; //cf our results directly with our list of expected foodtypes
 
         assertEquals(restaurantDao.getAllFoodtypesForARestaurant(testRestaurant.getId()), Arrays.asList(foodtypes));
     }

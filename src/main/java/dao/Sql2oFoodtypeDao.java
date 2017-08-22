@@ -75,22 +75,22 @@ public class Sql2oFoodtypeDao implements FoodtypeDao {
     @Override
     public List<Restaurant> getAllRestaurantsForAFoodtype(int foodtypeId) {
         List<Restaurant> restaurants = new ArrayList();
-        String joinQuery = "SELECT restaurantid FROM restaurants_foodtypes WHERE foodtypeid = :foodtypeId";
+        String joinQuery = "SELECT restaurantid FROM restaurants_foodtypes WHERE foodtypeid = :foodtypeId";//pull out restaurantids for join table when they match a foodtypeId in the same table
 
-        try (Connection con = sql2o.open()) {
-            List<Integer> allRestaurantIds = con.createQuery(joinQuery)
-                    .addParameter("foodtypeId", foodtypeId)
-                    .executeAndFetch(Integer.class); //what is happening in the lines above?
-            for (Integer restaurantId : allRestaurantIds){
-                String restaurantQuery = "SELECT * FROM restaurants WHERE id = :restaurantId";
-                restaurants.add(
+        try (Connection con = sql2o.open()) { //keeps connection to the db open
+            List<Integer> allRestaurantIds = con.createQuery(joinQuery) //add above string argument to query to retrieve said restaurantids
+                    .addParameter("foodtypeId", foodtypeId) //add foodtypeId as the argument in sql query
+                    .executeAndFetch(Integer.class); //fetch the restaurantIds which is in the Integer class
+            for (Integer restaurantId : allRestaurantIds){ //cycle through the arrayList of restaurantIds
+                String restaurantQuery = "SELECT * FROM restaurants WHERE id = :restaurantId"; //search the restaurant table for the values that match said restaurantId--one-by-one
+                restaurants.add(  //add what you find from restaurant table to a collection named "restaurants"
                         con.createQuery(restaurantQuery)
-                                .addParameter("restaurantId", restaurantId)
-                                .executeAndFetchFirst(Restaurant.class));
+                                .addParameter("restaurantId", restaurantId) //add restaurantId to sql query for our search
+                                .executeAndFetchFirst(Restaurant.class));//items (objects) pulled out will be from the restaurant class
             }
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
-        return restaurants;
+        return restaurants; //return the values found from above evaluation
     }
 }
