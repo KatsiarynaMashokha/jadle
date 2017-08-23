@@ -2,11 +2,16 @@ import com.google.gson.Gson;
 import dao.Sql2oFoodtypeDao;
 import dao.Sql2oRestaurantDao;
 import dao.Sql2oReviewDao;
+import exceptions.ApiException;
 import models.Foodtype;
 import models.Restaurant;
 import models.Review;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static spark.Spark.*;
 
 public class App {
@@ -40,7 +45,12 @@ public class App {
 
         get("/restaurants/:id", "application/json", (req, res) -> {
             int restaurantId = Integer.parseInt(req.params("id"));
-            return gson.toJson(restaurantDao.findById(restaurantId));
+            Restaurant restaurant = restaurantDao.findById(restaurantId);
+
+            if (restaurant == null) {
+                throw new ApiException(String.format("No restaurant with the id %d found", restaurantId), 404);
+            }
+            return gson.toJson(restaurant);
         });
 
         //UPDATE
@@ -78,11 +88,6 @@ public class App {
         get("/restaurants/delete/all", "application/json", (req, res) -> {
             restaurantDao.clearAllRestaurants();
             return restaurantDao.getAll().size();
-        });
-
-        //FILTERS
-        after((req, res) ->{
-            res.type("application/json");
         });
 
         // FOODTYPES
@@ -140,6 +145,20 @@ public class App {
             int restaurantId = Integer.parseInt(req.params("id"));
             reviewDao.getAllReviewsByRestaurant(restaurantId);
             return gson.toJson(reviewDao.getAllReviewsByRestaurant(restaurantId));
+        });
+
+        //FILTERS
+        after((req, res) ->{
+            res.type("application/json");
+        });
+        exception(ApiException.class, (exc, req, res) -> {
+            ApiException err = (ApiException) exc;
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("status", err.getStatusCode());
+            jsonMap.put("errorMessage", err.getMessage());
+            res.type("application/json"); //after does not run in case of an exception.
+            res.status(err.getStatusCode()); //set the status
+            res.body(gson.toJson(jsonMap));  //set the output.
         });
     }
 }
